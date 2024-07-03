@@ -34,8 +34,87 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   var temp = "";
+
+  void _calculate() {
+    List<String> totalOperators = ['+', '-', 'x', '/', '%'];
+
+    List<double> numbers = [];
+    List<String> operators = [];
+
+    String number = "";
+    for (int i = 0; i < temp.length; i++) {
+      if (totalOperators.contains(temp[i])) {
+        operators.add(temp[i]);
+        if (number.isNotEmpty) {
+          numbers.add(double.parse(number));
+          number = ""; // Reset number string
+        }
+      } else {
+        number += temp[i];
+      }
+    }
+
+    if (number.isNotEmpty) {
+      numbers.add(double.parse(number));
+      number = ""; // Reset number string
+    }
+
+    print(numbers.length);
+    print(operators.length);
+
+    if (operators.length + 1 != numbers.length) {
+      setState(() {
+        temp = "Syntax Error";
+        print(temp);
+      });
+      temp = "";
+      return;
+    }
+
+    double ans = numbers[0];
+
+    // 78 + 10 / 2 - 89 x 5698 % 34
+    // 78 10 2 89 5698 34
+    // + / - x %
+
+    for (int i = 0; i < operators.length; i++) {
+      double firstNum = ans;
+      double secondNum = numbers[i + 1];
+
+      switch (operators[i]) {
+        case '+':
+          ans = firstNum + secondNum;
+          break;
+        case '-':
+          ans = firstNum - secondNum;
+          break;
+        case 'x':
+          ans = firstNum * secondNum;
+          break;
+        case '/':
+          ans = firstNum / secondNum;
+          break;
+        case '%':
+          ans = (firstNum / secondNum) * 100;
+          break;
+      }
+    }
+
+    int intAns;
+
+    if (ans == ans.truncate()) {
+      int intAns = ans.toInt(); // Convert ans to int
+      setState(() {
+        temp = intAns.toString();
+      });
+    } else {
+      setState(() {
+        temp = ans.toString();
+      });
+    }
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,18 +126,18 @@ class _MyHomePageState extends State<MyHomePage> {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Padding(
-                padding: EdgeInsets.only(right: 25.0.sp, left: 25.0.sp, bottom: 15.0.sp),
+                padding: EdgeInsets.only(
+                    right: 25.0.sp, left: 25.0.sp, bottom: 15.0.sp),
                 child: Container(
-                    alignment: Alignment.bottomRight,
                     child: Text(
-                          "235",
-                          style: TextStyle(fontSize: 32.sp, color: Colors.white),
-                          maxLines: 1,
-                          textAlign: TextAlign.right,
-                          softWrap: false,
-                          overflow: TextOverflow.clip,
-                         )
-                ),
+                  temp,
+                  style: TextStyle(fontSize: 32.sp, color: Colors.white),
+                  maxLines: 1,
+                  textAlign: TextAlign.right,
+                  textDirection: TextDirection.ltr,
+                  softWrap: false,
+                  overflow: TextOverflow.clip,
+                )),
               ),
             ),
             Container(
@@ -76,9 +155,11 @@ class _MyHomePageState extends State<MyHomePage> {
                             37.sp, // Set maximum height to 50.0 logical pixels
                       ),
                       child: ElevatedButton(
-                        onPressed: () { setState(() {
-                          temp = "";
-                        });},
+                        onPressed: () {
+                          setState(() {
+                            temp = "";
+                          });
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor:
                               Colors.white60, // Adjust padding as needed
@@ -134,7 +215,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: ElevatedButton(
                         onPressed: () {
                           setState(() {
-                            temp += "%";
+                            temp += " % ";
                           });
                         },
                         style: ElevatedButton.styleFrom(
@@ -163,7 +244,11 @@ class _MyHomePageState extends State<MyHomePage> {
                             37.sp, // Set maximum height to 50.0 logical pixels
                       ),
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            temp += " / ";
+                          });
+                        },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Color(0xFFFFA500)
                             // Adjust padding as needed
@@ -200,7 +285,11 @@ class _MyHomePageState extends State<MyHomePage> {
                             37.sp, // Set maximum height to 50.0 logical pixels
                       ),
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            temp += "7";
+                          });
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor:
                               Color(0xFF4D4D4D), // Adjust padding as needed
@@ -227,7 +316,11 @@ class _MyHomePageState extends State<MyHomePage> {
                             37.sp, // Set maximum height to 50.0 logical pixels
                       ),
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            temp += "8";
+                          });
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor:
                               Color(0xFF4D4D4D), // Adjust padding as needed
@@ -254,7 +347,11 @@ class _MyHomePageState extends State<MyHomePage> {
                             37.sp, // Set maximum height to 50.0 logical pixels
                       ),
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            temp += "9";
+                          });
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor:
                               Color(0xFF4D4D4D), // Adjust padding as needed
@@ -281,7 +378,11 @@ class _MyHomePageState extends State<MyHomePage> {
                             37.sp, // Set maximum height to 50.0 logical pixels
                       ),
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            temp += " x ";
+                          });
+                        },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Color(0xFFFFA500)
                             // Adjust padding as needed
@@ -318,7 +419,11 @@ class _MyHomePageState extends State<MyHomePage> {
                             37.sp, // Set maximum height to 50.0 logical pixels
                       ),
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            temp += "4";
+                          });
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor:
                               Color(0xFF4D4D4D), // Adjust padding as needed
@@ -345,7 +450,11 @@ class _MyHomePageState extends State<MyHomePage> {
                             37.sp, // Set maximum height to 50.0 logical pixels
                       ),
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            temp += "5";
+                          });
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor:
                               Color(0xFF4D4D4D), // Adjust padding as needed
@@ -372,7 +481,11 @@ class _MyHomePageState extends State<MyHomePage> {
                             37.sp, // Set maximum height to 50.0 logical pixels
                       ),
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            temp += "6";
+                          });
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor:
                               Color(0xFF4D4D4D), // Adjust padding as needed
@@ -399,7 +512,11 @@ class _MyHomePageState extends State<MyHomePage> {
                             37.sp, // Set maximum height to 50.0 logical pixels
                       ),
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            temp += " - ";
+                          });
+                        },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Color(0xFFFFA500)
                             // Adjust padding as needed
@@ -436,7 +553,11 @@ class _MyHomePageState extends State<MyHomePage> {
                             37.sp, // Set maximum height to 50.0 logical pixels
                       ),
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            temp += "1";
+                          });
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor:
                               Color(0xFF4D4D4D), // Adjust padding as needed
@@ -463,7 +584,11 @@ class _MyHomePageState extends State<MyHomePage> {
                             37.sp, // Set maximum height to 50.0 logical pixels
                       ),
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            temp += "2";
+                          });
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor:
                               Color(0xFF4D4D4D), // Adjust padding as needed
@@ -490,7 +615,11 @@ class _MyHomePageState extends State<MyHomePage> {
                             37.sp, // Set maximum height to 50.0 logical pixels
                       ),
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            temp += "3";
+                          });
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor:
                               Color(0xFF4D4D4D), // Adjust padding as needed
@@ -517,7 +646,11 @@ class _MyHomePageState extends State<MyHomePage> {
                             37.sp, // Set maximum height to 50.0 logical pixels
                       ),
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            temp += " + ";
+                          });
+                        },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Color(0xFFFFA500)
                             // Adjust padding as needed
@@ -547,7 +680,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          temp += "0";
+                        });
+                      },
                       style: ElevatedButton.styleFrom(
                         padding: EdgeInsets.symmetric(
                             horizontal: 20.0.sp, vertical: 10.0.sp),
@@ -576,7 +713,11 @@ class _MyHomePageState extends State<MyHomePage> {
                           37.sp, // Set maximum height to 50.0 logical pixels
                     ),
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          temp += ".";
+                        });
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor:
                             Color(0xFF4D4D4D), // Adjust padding as needed
@@ -603,7 +744,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           37.sp, // Set maximum height to 50.0 logical pixels
                     ),
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: _calculate,
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Color(0xFFFFA500)
                           // Adjust padding as needed
