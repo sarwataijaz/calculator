@@ -34,6 +34,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  var temp = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,11 +44,21 @@ class _MyHomePageState extends State<MyHomePage> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Padding(
-              padding: EdgeInsets.only(right: 25.0.sp, left: 25.0.sp),
-              child: Align(
-                alignment: Alignment.bottomRight,
-                  child: Text("", style: TextStyle(fontSize: 32.sp, color: Colors.white),)
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Padding(
+                padding: EdgeInsets.only(right: 25.0.sp, left: 25.0.sp, bottom: 15.0.sp),
+                child: Container(
+                    alignment: Alignment.bottomRight,
+                    child: Text(
+                          "235",
+                          style: TextStyle(fontSize: 32.sp, color: Colors.white),
+                          maxLines: 1,
+                          textAlign: TextAlign.right,
+                          softWrap: false,
+                          overflow: TextOverflow.clip,
+                         )
+                ),
               ),
             ),
             Container(
@@ -63,7 +76,9 @@ class _MyHomePageState extends State<MyHomePage> {
                             37.sp, // Set maximum height to 50.0 logical pixels
                       ),
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () { setState(() {
+                          temp = "";
+                        });},
                         style: ElevatedButton.styleFrom(
                           backgroundColor:
                               Colors.white60, // Adjust padding as needed
@@ -117,7 +132,11 @@ class _MyHomePageState extends State<MyHomePage> {
                             37.sp, // Set maximum height to 50.0 logical pixels
                       ),
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            temp += "%";
+                          });
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor:
                               Colors.white60, // Adjust padding as needed
