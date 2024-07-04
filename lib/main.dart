@@ -37,36 +37,69 @@ class _MyHomePageState extends State<MyHomePage> {
   var temp = "";
 
   void _calculate() {
+    _scrollToStart();
+    print("function called");
+
+    String input = temp.replaceAll(' ', '');
+
+    print("Input temp: $input");
+
     List<String> totalOperators = ['+', '-', 'x', '/', '%'];
 
     List<double> numbers = [];
     List<String> operators = [];
 
     String number = "";
-    for (int i = 0; i < temp.length; i++) {
-      if (totalOperators.contains(temp[i])) {
-        operators.add(temp[i]);
-        if (number.isNotEmpty) {
-          numbers.add(double.parse(number));
-          number = ""; // Reset number string
+    for (int i = 0; i < input.length; i++) {
+      print("Processing character: ${input[i]} at index $i");
+
+      if (input[i] == '-' &&
+          (i == 0 || totalOperators.contains(input[i - 1]))) {
+        number += input[i];
+        print("Building negative number: $number");
+        continue;
+      }
+      if (totalOperators.contains(input[i])) {
+        print(number);
+        if (number.isEmpty) {
+          // If there's no number before the operator, it's a syntax error
+          setState(() {
+            temp = "Syntax Error";
+          });
+          return;
         }
+        operators.add(input[i]);
+        try {
+          numbers.add(double.parse(number));
+        } catch (e) {
+          print(number);
+          setState(() {
+            temp = "Invalid Number1";
+          });
+          return;
+        }
+        number = ""; // Reset number string
       } else {
-        number += temp[i];
+        number += input[i];
       }
     }
 
     if (number.isNotEmpty) {
-      numbers.add(double.parse(number));
+      try {
+        numbers.add(double.parse(number));
+      } catch (e) {
+        setState(() {
+          temp = "Invalid Number2";
+        });
+        return;
+      }
       number = ""; // Reset number string
     }
 
-    print(numbers.length);
-    print(operators.length);
-
-    if (operators.length + 1 != numbers.length) {
+    if (numbers.isEmpty ||
+        (operators.length + 1 != numbers.length && !operators.contains('%'))) {
       setState(() {
         temp = "Syntax Error";
-        print(temp);
       });
       temp = "";
       return;
@@ -74,70 +107,126 @@ class _MyHomePageState extends State<MyHomePage> {
 
     double ans = numbers[0];
 
-    // 78 + 10 / 2 - 89 x 5698 % 34
-    // 78 10 2 89 5698 34
-    // + / - x %
+    // Special case for a single number with a percentage
+    if (operators.length == 1 && operators[0] == '%' && numbers.length == 1) {
+      ans = ans / 100;
+    } else {
+      // 78 + 10 / 2 - 89 x 5698 % 34
+      // 78 10 2 89 5698 34
+      // + / - x %
 
-    for (int i = 0; i < operators.length; i++) {
-      double firstNum = ans;
-      double secondNum = numbers[i + 1];
+      for (int i = 0; i < operators.length; i++) {
+        double firstNum = ans;
+        double secondNum = numbers[i + 1];
 
-      switch (operators[i]) {
-        case '+':
-          ans = firstNum + secondNum;
-          break;
-        case '-':
-          ans = firstNum - secondNum;
-          break;
-        case 'x':
-          ans = firstNum * secondNum;
-          break;
-        case '/':
-          ans = firstNum / secondNum;
-          break;
-        case '%':
-          ans = (firstNum / secondNum) * 100;
-          break;
+        switch (operators[i]) {
+          case '+':
+            ans = firstNum + secondNum;
+            break;
+          case '-':
+            ans = firstNum - secondNum;
+            break;
+          case 'x':
+            ans = firstNum * secondNum;
+            break;
+          case '/':
+            if (secondNum == 0) {
+              setState(() {
+                temp = "Division by Zero";
+              });
+              temp = "";
+              return;
+            }
+            ans = firstNum / secondNum;
+            break;
+          case '%':
+            ans = (firstNum * secondNum) / 100;
+            break;
+        }
       }
     }
 
-    int intAns;
-
+    String finalAns;
     if (ans == ans.truncate()) {
-      int intAns = ans.toInt(); // Convert ans to int
-      setState(() {
-        temp = intAns.toString();
-      });
+      int intAns = ans.toInt();
+      if (intAns < 0) {
+        finalAns = intAns.toString().substring(0, 1) +
+            ' ' +
+            intAns.toString().substring(1);
+        setState(() {
+          temp = finalAns;
+        });
+      } else {
+        setState(() {
+          temp = intAns.toString();
+        });
+      }
     } else {
-      setState(() {
-        temp = ans.toString();
-      });
+      if (ans < 0) {
+        finalAns =
+            ans.toString().substring(0, 1) + ' ' + ans.toString().substring(1);
+        setState(() {
+          temp = finalAns;
+        });
+      } else {
+        setState(() {
+          temp = ans.toString();
+        });
+      }
     }
+  }
 
+  final ScrollController _scrollController = ScrollController();
+
+  void _scrollToEndIfNecessary() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_scrollController.hasClients) {
+        _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+      }
+    });
+  }
+
+  void _scrollToStart() {
+    if (_scrollController.hasClients) {
+      _scrollController.jumpTo(0);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.black,
-        body: Column(
+      backgroundColor: Colors.black,
+      body: LayoutBuilder(builder: (context, constraints) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          _scrollToEndIfNecessary();
+        });
+
+        return Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
+              controller: _scrollController,
               child: Padding(
                 padding: EdgeInsets.only(
                     right: 25.0.sp, left: 25.0.sp, bottom: 15.0.sp),
-                child: Container(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                      minWidth: MediaQuery.of(context).size.width),
+                  child: Container(
+                      child: Align(
+                    alignment: Alignment.bottomRight,
                     child: Text(
-                  temp,
-                  style: TextStyle(fontSize: 32.sp, color: Colors.white),
-                  maxLines: 1,
-                  textAlign: TextAlign.right,
-                  textDirection: TextDirection.ltr,
-                  softWrap: false,
-                  overflow: TextOverflow.clip,
-                )),
+                      temp,
+                      style: TextStyle(fontSize: 32.sp, color: Colors.white),
+                      maxLines: 1,
+                      textAlign: TextAlign.right,
+                      textDirection: TextDirection.ltr,
+                      softWrap: false,
+                      overflow: TextOverflow.clip,
+                    ),
+                  )),
+                ),
               ),
             ),
             Container(
@@ -766,6 +855,8 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ],
-        ));
+        );
+      }),
+    );
   }
 }
