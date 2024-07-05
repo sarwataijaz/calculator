@@ -1,9 +1,15 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+WidgetsFlutterBinding.ensureInitialized();
+FlutterError.onError = (FlutterErrorDetails details) {
+  // Log or handle the error details
+};
+  runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -74,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
         } catch (e) {
           print(number);
           setState(() {
-            temp = "Invalid Number1";
+            temp = "Syntax Error";
           });
           return;
         }
@@ -89,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
         numbers.add(double.parse(number));
       } catch (e) {
         setState(() {
-          temp = "Invalid Number2";
+          temp = "Syntax Error";
         });
         return;
       }
@@ -101,7 +107,6 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
         temp = "Syntax Error";
       });
-      temp = "";
       return;
     }
 
@@ -194,6 +199,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+
+    double screenWidth = MediaQuery.of(context).size.width;
+    //double textSize = screenWidth * 0.05;
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: LayoutBuilder(builder: (context, constraints) {
@@ -216,14 +225,16 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Container(
                       child: Align(
                     alignment: Alignment.bottomRight,
-                    child: Text(
-                      temp,
-                      style: TextStyle(fontSize: 32.sp, color: Colors.white),
-                      maxLines: 1,
-                      textAlign: TextAlign.right,
-                      textDirection: TextDirection.ltr,
-                      softWrap: false,
-                      overflow: TextOverflow.clip,
+                    child: Expanded(
+                      child: Text(
+                        temp,
+                        style: TextStyle(fontSize: (screenWidth*0.08).sp, color: Colors.white),
+                        maxLines: 1,
+                        textAlign: TextAlign.right,
+                        textDirection: TextDirection.ltr,
+                        softWrap: false,
+                        overflow: TextOverflow.clip,
+                      ),
                     ),
                   )),
                 ),
@@ -232,8 +243,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               padding: EdgeInsets.only(
                   bottom: 13.0.sp, left: 15.0.sp, right: 15.0.sp),
-              child: Expanded(
-                child: Row(
+              child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ConstrainedBox(
@@ -253,14 +263,16 @@ class _MyHomePageState extends State<MyHomePage> {
                           backgroundColor:
                               Colors.white60, // Adjust padding as needed
                         ),
-                        child: Align(
-                          alignment: Alignment.center,
-                          // Align the text to the left
-                          child: Text(
-                            "AC",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 19.sp,
+                        child: Expanded(
+                          child: Align(
+                            alignment: Alignment.center,
+                            // Align the text to the left
+                            child: Text(
+                              "AC",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: ((screenWidth*0.05)/37).sp,
+                              ),
                             ),
                           ),
                         ),
@@ -280,14 +292,16 @@ class _MyHomePageState extends State<MyHomePage> {
                           backgroundColor:
                               Colors.white60, // Adjust padding as needed
                         ),
-                        child: Align(
-                          alignment: Alignment.center,
-                          // Align the text to the left
-                          child: Text(
-                            "+/-",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 19.sp,
+                        child: Expanded(
+                          child: Align(
+                            alignment: Alignment.center,
+                            // Align the text to the left
+                            child: Text(
+                              "+/-",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: (screenWidth*0.05).sp,
+                              ),
                             ),
                           ),
                         ),
@@ -318,7 +332,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             "%",
                             style: TextStyle(
                               color: Colors.black,
-                              fontSize: 19.sp,
+                              fontSize: (screenWidth*0.05).sp,
                             ),
                           ),
                         ),
@@ -349,7 +363,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             "/",
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 19.sp,
+                              fontSize: (screenWidth*0.05).sp,
                             ),
                           ),
                         ),
@@ -358,12 +372,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
                 ),
               ),
-            ),
+
             Container(
               padding: EdgeInsets.only(
                   bottom: 13.0.sp, left: 15.0.sp, right: 15.0.sp),
-              child: Expanded(
-                child: Row(
+              child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ConstrainedBox(
@@ -390,7 +403,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             "7",
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 26.sp,
+                              fontSize: (screenWidth*0.07).sp,
                             ),
                           ),
                         ),
@@ -421,7 +434,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             "8",
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 26.sp,
+                              fontSize: (screenWidth*0.07).sp,
                             ),
                           ),
                         ),
@@ -452,7 +465,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             "9",
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 26.sp,
+                              fontSize: (screenWidth*0.07).sp,
                             ),
                           ),
                         ),
@@ -483,7 +496,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             "x",
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 26.sp,
+                              fontSize: (screenWidth*0.06).sp,
                             ),
                           ),
                         ),
@@ -492,12 +505,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
                 ),
               ),
-            ),
             Container(
               padding: EdgeInsets.only(
                   bottom: 13.0.sp, left: 15.0.sp, right: 15.0.sp),
-              child: Expanded(
-                child: Row(
+              child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ConstrainedBox(
@@ -524,7 +535,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             "4",
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 26.sp,
+                              fontSize: (screenWidth*0.07).sp,
                             ),
                           ),
                         ),
@@ -555,7 +566,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             "5",
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 26.sp,
+                              fontSize: (screenWidth*0.07).sp,
                             ),
                           ),
                         ),
@@ -586,7 +597,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             "6",
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 26.sp,
+                              fontSize: (screenWidth*0.07).sp,
                             ),
                           ),
                         ),
@@ -617,7 +628,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             "-",
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 32.sp,
+                              fontSize: (screenWidth*0.07).sp,
                             ),
                           ),
                         ),
@@ -626,11 +637,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
                 ),
               ),
-            ),
+
             Container(
               padding: EdgeInsets.only(
                   bottom: 13.0.sp, left: 15.0.sp, right: 15.0.sp),
-              child: Expanded(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -658,12 +668,12 @@ class _MyHomePageState extends State<MyHomePage> {
                             "1",
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 26.sp,
+                              fontSize: (screenWidth*0.07).sp,
                             ),
                           ),
                         ),
                       ),
-                    ),
+                      ),
                     SizedBox(width: 15.0.sp),
                     ConstrainedBox(
                       constraints: BoxConstraints(
@@ -689,7 +699,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             "2",
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 26.sp,
+                              fontSize: (screenWidth*0.07).sp,
                             ),
                           ),
                         ),
@@ -720,7 +730,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             "3",
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 26.sp,
+                              fontSize: (screenWidth*0.07).sp,
                             ),
                           ),
                         ),
@@ -751,7 +761,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             "+",
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 26.sp,
+                              fontSize: (screenWidth*0.06).sp,
                             ),
                           ),
                         ),
@@ -760,7 +770,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
                 ),
               ),
-            ),
+
             Container(
               padding: EdgeInsets.only(
                   bottom: 30.0.sp, left: 20.0.sp, right: 20.0.sp),
@@ -787,7 +797,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           "0",
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 26.sp,
+                            fontSize: (screenWidth*0.07).sp,
                           ),
                         ),
                       ),
@@ -818,7 +828,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           ".",
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 26.sp,
+                            fontSize: (screenWidth*0.07).sp,
                           ),
                         ),
                       ),
@@ -845,7 +855,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           "=",
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 26.sp,
+                            fontSize: (screenWidth*0.06).sp,
                           ),
                         ),
                       ),
