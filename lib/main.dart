@@ -248,10 +248,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: [
                     ConstrainedBox(
                       constraints: BoxConstraints(
-                        maxWidth: 37.sp,
-                        // Set maximum width to double.infinity for full width
-                        maxHeight:
-                            37.sp, // Set maximum height to 50.0 logical pixels
+                        maxWidth: 20.w,
+                        maxHeight: 10.h,
                       ),
                       child: ElevatedButton(
                         onPressed: () {
@@ -271,20 +269,18 @@ class _MyHomePageState extends State<MyHomePage> {
                               "AC",
                               style: TextStyle(
                                 color: Colors.black,
-                                fontSize: ((screenWidth*0.05)/37).sp,
+                                fontSize: ((screenWidth*0.05)).sp,
                               ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(width: 15.0.sp),
+                    SizedBox(width: 3.0.w),
                     ConstrainedBox(
                       constraints: BoxConstraints(
-                        maxWidth: 37.sp,
-                        // Set maximum width to double.infinity for full width
-                        maxHeight:
-                            37.sp, // Set maximum height to 50.0 logical pixels
+                        maxWidth: 20.w,
+                        maxHeight: 10.h,
                       ),
                       child: ElevatedButton(
                         onPressed: () {},
@@ -307,13 +303,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 15.0.sp),
+                    SizedBox(width: 3.0.w),
                     ConstrainedBox(
                       constraints: BoxConstraints(
-                        maxWidth: 37.sp,
-                        // Set maximum width to double.infinity for full width
-                        maxHeight:
-                            37.sp, // Set maximum height to 50.0 logical pixels
+                        maxWidth: 20.w,
+                        maxHeight: 10.h,
                       ),
                       child: ElevatedButton(
                         onPressed: () {
@@ -338,13 +332,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 15.0.sp),
+                    SizedBox(width: 3.0.w),
                     ConstrainedBox(
                       constraints: BoxConstraints(
-                        maxWidth: 37.sp,
-                        // Set maximum width to double.infinity for full width
-                        maxHeight:
-                            37.sp, // Set maximum height to 50.0 logical pixels
+                        maxWidth: 20.w,
+                        maxHeight: 10.h,
                       ),
                       child: ElevatedButton(
                         onPressed: () {
@@ -381,10 +373,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: [
                     ConstrainedBox(
                       constraints: BoxConstraints(
-                        maxWidth: 37.sp,
-                        // Set maximum width to double.infinity for full width
-                        maxHeight:
-                            37.sp, // Set maximum height to 50.0 logical pixels
+                        maxWidth: 20.w,
+                        maxHeight: 10.h,
                       ),
                       child: ElevatedButton(
                         onPressed: () {
@@ -409,13 +399,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 15.0.sp),
+                    SizedBox(width: 3.0.w),
                     ConstrainedBox(
                       constraints: BoxConstraints(
-                        maxWidth: 37.sp,
-                        // Set maximum width to double.infinity for full width
-                        maxHeight:
-                            37.sp, // Set maximum height to 50.0 logical pixels
+                        maxWidth: 20.w,
+                        maxHeight: 10.h,
                       ),
                       child: ElevatedButton(
                         onPressed: () {
@@ -440,13 +428,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 15.0.sp),
+                    SizedBox(width: 3.0.w),
                     ConstrainedBox(
                       constraints: BoxConstraints(
-                        maxWidth: 37.sp,
-                        // Set maximum width to double.infinity for full width
-                        maxHeight:
-                            37.sp, // Set maximum height to 50.0 logical pixels
+                        maxWidth: 20.w,
+                        maxHeight: 10.h,
                       ),
                       child: ElevatedButton(
                         onPressed: () {
@@ -471,13 +457,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 15.0.sp),
+                    SizedBox(width: 3.0.w),
                     ConstrainedBox(
                       constraints: BoxConstraints(
-                        maxWidth: 37.sp,
-                        // Set maximum width to double.infinity for full width
-                        maxHeight:
-                            37.sp, // Set maximum height to 50.0 logical pixels
+                        maxWidth: 20.w,
+                        maxHeight: 10.h,
                       ),
                       child: ElevatedButton(
                         onPressed: () {
@@ -513,10 +497,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: [
                     ConstrainedBox(
                       constraints: BoxConstraints(
-                        maxWidth: 37.sp,
-                        // Set maximum width to double.infinity for full width
-                        maxHeight:
-                            37.sp, // Set maximum height to 50.0 logical pixels
+                        maxWidth: 20.w,
+                        maxHeight: 10.h,
                       ),
                       child: ElevatedButton(
                         onPressed: () {
@@ -541,13 +523,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 15.0.sp),
+                    SizedBox(width: 3.0.w),
                     ConstrainedBox(
                       constraints: BoxConstraints(
-                        maxWidth: 37.sp,
-                        // Set maximum width to double.infinity for full width
-                        maxHeight:
-                            37.sp, // Set maximum height to 50.0 logical pixels
+                        maxWidth: 20.w,
+                        maxHeight: 10.h,
                       ),
                       child: ElevatedButton(
                         onPressed: () {
@@ -572,13 +552,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 15.0.sp),
+                    SizedBox(width: 3.0.w),
                     ConstrainedBox(
                       constraints: BoxConstraints(
-                        maxWidth: 37.sp,
-                        // Set maximum width to double.infinity for full width
-                        maxHeight:
-                            37.sp, // Set maximum height to 50.0 logical pixels
+                        maxWidth: 20.w,
+                        maxHeight: 10.h,
                       ),
                       child: ElevatedButton(
                         onPressed: () {
@@ -603,13 +581,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 15.0.sp),
+                    SizedBox(width: 3.0.w),
                     ConstrainedBox(
                       constraints: BoxConstraints(
-                        maxWidth: 37.sp,
-                        // Set maximum width to double.infinity for full width
-                        maxHeight:
-                            37.sp, // Set maximum height to 50.0 logical pixels
+                        maxWidth: 20.w,
+                        maxHeight: 10.h,
                       ),
                       child: ElevatedButton(
                         onPressed: () {
@@ -646,10 +622,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: [
                     ConstrainedBox(
                       constraints: BoxConstraints(
-                        maxWidth: 37.sp,
-                        // Set maximum width to double.infinity for full width
-                        maxHeight:
-                            37.sp, // Set maximum height to 50.0 logical pixels
+                        maxWidth: 20.w,
+                        maxHeight: 10.h,
                       ),
                       child: ElevatedButton(
                         onPressed: () {
@@ -674,13 +648,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                       ),
-                    SizedBox(width: 15.0.sp),
+                    SizedBox(width: 3.0.w),
                     ConstrainedBox(
                       constraints: BoxConstraints(
-                        maxWidth: 37.sp,
-                        // Set maximum width to double.infinity for full width
-                        maxHeight:
-                            37.sp, // Set maximum height to 50.0 logical pixels
+                        maxWidth: 20.w,
+                        maxHeight: 10.h,
                       ),
                       child: ElevatedButton(
                         onPressed: () {
@@ -705,13 +677,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 15.0.sp),
+                    SizedBox(width: 3.0.w),
                     ConstrainedBox(
                       constraints: BoxConstraints(
-                        maxWidth: 37.sp,
-                        // Set maximum width to double.infinity for full width
-                        maxHeight:
-                            37.sp, // Set maximum height to 50.0 logical pixels
+                        maxWidth: 20.w,
+                        maxHeight: 10.h,
                       ),
                       child: ElevatedButton(
                         onPressed: () {
@@ -736,13 +706,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 15.0.sp),
+                    SizedBox(width: 3.0.w),
                     ConstrainedBox(
                       constraints: BoxConstraints(
-                        maxWidth: 37.sp,
-                        // Set maximum width to double.infinity for full width
-                        maxHeight:
-                            37.sp, // Set maximum height to 50.0 logical pixels
+                        maxWidth: 20.w,
+                        maxHeight: 10.h,
                       ),
                       child: ElevatedButton(
                         onPressed: () {
@@ -803,13 +771,11 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                   ),
-                  SizedBox(width: 15.0),
+                  SizedBox(width: 3.0.w),
                   ConstrainedBox(
                     constraints: BoxConstraints(
-                      maxWidth: 37.sp,
-                      // Set maximum width to double.infinity for full width
-                      maxHeight:
-                          37.sp, // Set maximum height to 50.0 logical pixels
+                      maxWidth: 20.w,
+                      maxHeight: 10.h,
                     ),
                     child: ElevatedButton(
                       onPressed: () {
@@ -834,13 +800,11 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                   ),
-                  SizedBox(width: 15.0.sp),
+                  SizedBox(width: 3.0.w),
                   ConstrainedBox(
                     constraints: BoxConstraints(
-                      maxWidth: 37.sp,
-                      // Set maximum width to double.infinity for full width
-                      maxHeight:
-                          37.sp, // Set maximum height to 50.0 logical pixels
+                      maxWidth: 20.w,
+                      maxHeight: 10.h,
                     ),
                     child: ElevatedButton(
                       onPressed: _calculate,
